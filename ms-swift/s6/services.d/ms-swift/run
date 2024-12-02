@@ -1,0 +1,7 @@
+#!/command/with-contenv bash
+
+cd "${HOME}"
+source .bashrc
+echo "INFO: starting SWIFT Web UI..."
+exec 2>&1
+exec swift web-ui --lang=en --host=0.0.0.0

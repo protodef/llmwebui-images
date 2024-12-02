@@ -1,0 +1,25 @@
+name: Disk cleanup
+description: Free up disk space by removing unnecessary packages and files
+runs:
+  using: composite
+  steps:
+    - name: Remove packages
+      shell: bash
+      run: |
+        sudo apt-get -yq remove azure-cli microsoft-edge-stable google-cloud-cli google-chrome-stable firefox powershell mono-devel
+        sudo apt-get -yq remove '^dotnet-.*'
+        sudo apt-get -yq remove '^temurin-.*'
+        sudo apt-get -yq remove '^llvm-.*'
+        sudo apt-get -yq remove '^mysql-.*'
+        sudo apt-get -yq remove '^postgresql-.*'
+        sudo apt-get -yq autoremove
+        sudo apt-get clean
+    - name: Remove files
+      shell: bash
+      run: |
+        sudo rm -rf /usr/local/lib/android
+        sudo rm -rf /usr/local/.ghcup
+        sudo rm -rf /usr/share/swift
+        sudo rm -rf /usr/local/share/powershell
+        sudo rm -rf /usr/share/miniconda
+        sudo rm -rf /usr/local/share/chromium
